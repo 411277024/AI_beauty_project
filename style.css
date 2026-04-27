@@ -1,0 +1,346 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Microsoft JhengHei", Arial, sans-serif;
+  background: linear-gradient(135deg, #fff4f8 0%, #f5ecff 50%, #eef7ff 100%);
+  color: #3d3340;
+  min-height: 100vh;
+}
+
+.navbar {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 18px rgba(160, 116, 170, 0.12);
+}
+
+.navbar-brand {
+  font-weight: 800;
+  color: #a55cc7 !important;
+  letter-spacing: 0.5px;
+}
+
+.nav-link {
+  color: #5f5264 !important;
+  font-weight: 600;
+}
+
+.hero {
+  padding: 90px 0 60px;
+}
+
+.hero-title {
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.15;
+  color: #42304b;
+}
+
+.hero-title span {
+  background: linear-gradient(90deg, #d66ba0, #a55cc7, #5b8def);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-text {
+  font-size: 1.1rem;
+  color: #6c5d70;
+  line-height: 1.9;
+  max-width: 620px;
+}
+
+.hero-card {
+  border: 0;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(139, 92, 160, 0.22);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+}
+
+.beauty-preview {
+  min-height: 430px;
+  background: radial-gradient(circle at 25% 20%, #ffd6e8 0 18%, transparent 19%),
+              radial-gradient(circle at 80% 18%, #ddd0ff 0 17%, transparent 18%),
+              linear-gradient(145deg, #ffffff, #fdebf4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.face {
+  width: 190px;
+  height: 245px;
+  border-radius: 48% 48% 44% 44%;
+  background: #ffd8c8;
+  position: relative;
+  box-shadow: inset 0 -12px 0 rgba(219, 139, 123, 0.18);
+  z-index: 2;
+}
+
+.hair {
+  width: 245px;
+  height: 190px;
+  border-radius: 48% 48% 25% 25%;
+  background: #4b2e3a;
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+
+.bang {
+  width: 95px;
+  height: 90px;
+  background: #4b2e3a;
+  border-radius: 0 0 80px 80px;
+  position: absolute;
+  top: -18px;
+  left: 28px;
+  transform: rotate(20deg);
+}
+
+.eye {
+  width: 16px;
+  height: 16px;
+  background: #392735;
+  border-radius: 50%;
+  position: absolute;
+  top: 105px;
+}
+
+.eye.left { left: 55px; }
+.eye.right { right: 55px; }
+
+.blush {
+  width: 34px;
+  height: 18px;
+  background: rgba(236, 112, 146, 0.28);
+  border-radius: 50%;
+  position: absolute;
+  top: 138px;
+}
+
+.blush.left { left: 30px; }
+.blush.right { right: 30px; }
+
+.lip {
+  width: 42px;
+  height: 18px;
+  border-radius: 0 0 22px 22px;
+  background: #d66b8f;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 170px;
+}
+
+.floating-tag {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-weight: 700;
+  color: #6b4778;
+  box-shadow: 0 12px 26px rgba(112, 80, 140, 0.16);
+  font-size: 0.95rem;
+}
+
+.tag-1 { top: 55px; left: 28px; }
+.tag-2 { right: 25px; top: 118px; }
+.tag-3 { bottom: 60px; left: 35px; }
+
+.section-title {
+  font-weight: 850;
+  color: #493450;
+  margin-bottom: 12px;
+}
+
+.section-subtitle {
+  color: #76677a;
+  line-height: 1.8;
+}
+
+.feature-card,
+.form-card,
+.result-card {
+  border: 0;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 16px 38px rgba(135, 96, 150, 0.12);
+  height: 100%;
+}
+
+.feature-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #ffd5e6, #e5d9ff);
+  color: #8a4ab0;
+  margin-bottom: 18px;
+}
+
+.form-label {
+  font-weight: 700;
+  color: #57465f;
+}
+
+.form-select,
+.form-control {
+  border-radius: 16px;
+  border: 1px solid #eadced;
+  padding: 12px 14px;
+}
+
+.form-select:focus,
+.form-control:focus {
+  border-color: #bf82d8;
+  box-shadow: 0 0 0 0.2rem rgba(191, 130, 216, 0.18);
+}
+
+.btn-beauty {
+  border: 0;
+  border-radius: 999px;
+  padding: 13px 30px;
+  color: white;
+  font-weight: 800;
+  background: linear-gradient(90deg, #d66ba0, #a55cc7);
+  box-shadow: 0 12px 26px rgba(165, 92, 199, 0.24);
+  transition: 0.2s ease;
+}
+
+.btn-beauty:hover {
+  transform: translateY(-2px);
+  color: white;
+  box-shadow: 0 16px 34px rgba(165, 92, 199, 0.32);
+}
+
+.badge-soft {
+  border-radius: 999px;
+  background: #f4e6fb;
+  color: #8a4ab0;
+  padding: 8px 12px;
+  font-weight: 700;
+  margin-right: 6px;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.result-box {
+  background: #fff7fb;
+  border: 1px solid #f0d8e7;
+  border-radius: 20px;
+  padding: 18px;
+  height: 100%;
+}
+
+.result-box h5 {
+  font-weight: 800;
+  color: #8a4ab0;
+  margin-bottom: 12px;
+}
+
+footer {
+  padding: 30px 0;
+  color: #806f85;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 60px 0 35px;
+  }
+  .beauty-preview {
+    min-height: 340px;
+  }
+  .floating-tag {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+  }
+}
+/* AI 掃描動畫特效 */
+@keyframes scanFace {
+  0% { top: 0%; opacity: 1; }
+  50% { top: 100%; opacity: 1; }
+  100% { top: 0%; opacity: 0; }
+}
+.scanning {
+  display: block !important;
+  animation: scanFace 2s ease-in-out infinite;
+}
+/* =========================================
+   夜間模式 (Dark Mode) 專屬自訂樣式 (調亮柔和版)
+   ========================================= */
+[data-bs-theme="dark"] body {
+  background: #2a2432; /* 從極黑改為深紫灰色，提升整體亮度 */
+  color: #e0e0e0;
+}
+
+[data-bs-theme="dark"] .navbar {
+  background: rgba(42, 36, 50, 0.85);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+}
+
+[data-bs-theme="dark"] .navbar-brand,
+[data-bs-theme="dark"] .hero-title,
+[data-bs-theme="dark"] .section-title,
+[data-bs-theme="dark"] .form-label {
+  color: #f8f9fa !important;
+}
+
+[data-bs-theme="dark"] .nav-link {
+  color: #d1c8d6 !important;
+}
+
+/* 將卡片提亮，拉出與背景的層次感 */
+[data-bs-theme="dark"] .hero-card,
+[data-bs-theme="dark"] .feature-card,
+[data-bs-theme="dark"] .form-card,
+[data-bs-theme="dark"] .result-card {
+  background: rgba(58, 50, 66, 0.85);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.25);
+}
+
+/* 提亮插圖背後的漸層圓圈 */
+[data-bs-theme="dark"] .beauty-preview {
+  background: radial-gradient(circle at 25% 20%, #5d3a4d 0 18%, transparent 19%),
+              radial-gradient(circle at 80% 18%, #4d3d6e 0 17%, transparent 18%),
+              linear-gradient(145deg, #3d3345, #2d2535);
+}
+
+/* 推薦結果與表單的方塊，稍微拉高明度 */
+[data-bs-theme="dark"] .result-box {
+  background: #352c40;
+  border-color: #50445a;
+}
+
+/* 柔和標籤 */
+[data-bs-theme="dark"] .badge-soft {
+  background: #473356;
+  color: #dfb3f5;
+}
+
+/* 表單輸入框夜間樣式提亮 */
+[data-bs-theme="dark"] .form-control,
+[data-bs-theme="dark"] .form-select {
+  background-color: #352c40;
+  border-color: #554a61;
+  color: #e0e0e0;
+}
+
+[data-bs-theme="dark"] .form-control:focus,
+[data-bs-theme="dark"] .form-select:focus {
+  border-color: #c48be0;
+  box-shadow: 0 0 0 0.2rem rgba(196, 139, 224, 0.25);
+}
+
+[data-bs-theme="dark"] .text-muted {
+  color: #b8b0bf !important;
+}
