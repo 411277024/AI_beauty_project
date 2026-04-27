@@ -144,5 +144,53 @@ form.addEventListener("submit", function(event) {
 });
 
 function saveFavorite() {
-  document.getElementById("saveMessage").textContent = "已收藏此推薦結果！";
+    console.log("儲存按鈕被點擊了"); // 開發者工具可以看到有沒有執行到這
+    const saveBtn = document.querySelector('button[onclick="saveFavorite()"]');
+    const saveMsg = document.getElementById("saveMessage");
+    const reportArea = document.getElementById("resultContent");
+
+    if (!reportArea) {
+        alert("找不到結果區塊，請先產生推薦結果！");
+        return;
+    }
+
+    // 按鈕狀態更新
+    const originalBtnText = saveBtn.innerHTML;
+    saveBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>生成中...';
+    saveBtn.disabled = true;
+    saveMsg.textContent = "正在捕捉畫面...";
+
+    const isDarkMode = document.documentElement.getAttribute("data-bs-theme") === "dark";
+    const bgColor = isDarkMode ? "#2a2432" : "#ffffff";
+
+    // 呼叫截圖魔法
+    html2canvas(reportArea, {
+        scale: 2,
+        useCORS: true, 
+        backgroundColor: bgColor,
+        logging: false // 關閉日誌以提升效能
+    }).then(canvas => {
+        const imgData = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
+        link.download = "My_AI_Beauty_Report.png";
+        link.href = imgData;
+        link.click();
+
+        // 成功後的提示
+        saveBtn.innerHTML = '<i class="bi bi-check-circle me-2"></i>已儲存';
+        saveBtn.classList.replace("btn-beauty", "btn-success");
+        saveMsg.textContent = "報告已成功下載！";
+
+        setTimeout(() => {
+            saveBtn.innerHTML = originalBtnText;
+            saveBtn.classList.replace("btn-success", "btn-beauty");
+            saveBtn.disabled = false;
+            saveMsg.textContent = "";
+        }, 3000);
+    }).catch(err => {
+        console.error("下載出錯:", err);
+        alert("儲存失敗，請檢查網路連線或稍後再試。");
+        saveBtn.innerHTML = originalBtnText;
+        saveBtn.disabled = false;
+    });
 }

@@ -344,3 +344,25 @@ footer {
 [data-bs-theme="dark"] .text-muted {
   color: #b8b0bf !important;
 }
+/* 讓樣板在網頁上看不見，但確實存在於 DOM 中 */
+.report-export-container {
+    position: absolute;
+    left: -9999px; /* 移到螢幕外面 */
+    top: 0;
+    width: 1200px;  /* 寫死寬度，確保不變形 */
+    height: 700px;  /* 寫死高度 */
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); /* 漂亮的背景色 */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    font-family: "Your-Font-Name", sans-serif;
+}
+
+/* 這裡根據你那張漂亮的報告圖來寫細節樣式 */
+.report-header {
+    font-size: 28px;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 20px;
+}
+/* 其他區塊的 Flex 或 Grid 排版... */
