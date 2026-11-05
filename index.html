@@ -134,11 +134,11 @@
                     <div class="row g-3 align-items-center">
                       <div class="col-md-7">
                         <input class="form-control" type="file" id="photoInput" accept="image/*" capture="user">
-                        <button type="button" class="btn btn-outline-secondary rounded-pill px-4 mt-3" onclick="analyzePhoto()">
+                        <button id="analyze-submit-btn" type="button" class="btn btn-outline-secondary rounded-pill px-4 mt-3" onclick="analyzePhoto()">
                           <i class="bi bi-search-heart"></i> 開始照片分析
                         </button>
                       </div>
-                      
+                       
                       <div class="col-md-5 text-center">
                         <div id="tryOnWrapper" class="position-relative d-inline-block d-none" style="max-height: 220px;">
                           <img id="photoPreview" src="" alt="照片預覽" class="img-fluid rounded-4" style="max-height: 220px; border-radius: 16px; object-fit: cover; box-shadow: 0 12px 28px rgba(135, 96, 150, 0.18);">
@@ -151,6 +151,7 @@
                     <div id="photoAnalysis" class="mt-3 d-none">
                       <span class="badge-soft">臉型：<span id="detectedFace">尚未分析</span></span>
                       <span class="badge-soft">眼型：<span id="detectedEye">尚未分析</span></span>
+                      <span class="badge-soft">眼皮：<span id="detectedEyelid">尚未分析</span></span>
                       <span class="badge-soft">鼻型：<span id="detectedNose">尚未分析</span></span>
                       <span class="badge-soft">唇形：<span id="detectedLip">尚未分析</span></span>
                     </div>
@@ -162,34 +163,53 @@
                   <select class="form-select" id="faceShape" required>
                     <option value="">請選擇</option>
                     <option value="round">圓臉</option>
-                    <option value="square">方臉</option>
+                    <option value="square">方形臉</option>
                     <option value="long">長臉</option>
                     <option value="oval">鵝蛋臉</option>
                     <option value="heart">心形臉</option>
+                    <option value="diamond">菱形臉</option>
+                    <option value="hexagonal">六角形臉</option>
+                    <option value="squareround">方圓臉</option>
                   </select>
                 </div>
 
-                <div class="col-md-4">
-                  <label class="form-label">眼型</label>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label text-muted">眼型形狀 </label>
                   <select class="form-select" id="eyeShape" required>
                     <option value="">請選擇</option>
                     <option value="almond">杏仁眼</option>
                     <option value="round_eye">圓眼</option>
+                    <option value="phoenix">丹鳳眼</option>
+                    <option value="peach">桃花眼</option>
+                    <option value="fox">狐狸眼</option>
+                    <option value="dog">狗狗眼</option>
+                    <option value="narrow">細長眼</option>
+                  </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label text-muted">眼皮類型 </label>
+                  <select class="form-select" id="eyelidType" required>
+                    <option value="">請選擇</option>
+                    <option value="double">雙眼皮</option>
+                    <option value="single">單眼皮</option>
                     <option value="hooded">內雙</option>
-                    <option value="long_eye">細長眼</option>
-                    <option value="drooping">下垂眼</option>
                   </select>
                 </div>
 
-                <div class="col-md-4">
-                  <label class="form-label">鼻型</label>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label text-muted">鼻型 </label>
                   <select class="form-select" id="noseShape" required>
                     <option value="">請選擇</option>
-                    <option value="small">小巧鼻</option>
-                    <option value="straight">直挺鼻</option>
-                    <option value="round_nose">圓鼻頭</option>
-                    <option value="wide">寬鼻翼</option>
-                    <option value="high">高鼻樑</option>
+                    <option value="小巧鼻">小巧鼻</option>
+                    <option value="蒜頭鼻">蒜頭鼻</option>
+                    <option value="水滴鼻">水滴鼻</option>
+                    <option value="直挺鼻">直挺鼻</option>
+                    <option value="寬鼻型">寬鼻型</option>
+                    <option value="精緻尖鼻">精緻尖鼻</option>
+                    <option value="肉感鼻">肉感鼻</option>
+                    <option value="小翹鼻">小翹鼻</option>
+                    <option value="鷹鉤鼻">鷹鉤鼻</option>
+                    <option value="扁鼻">扁鼻</option>
                   </select>
                 </div>
 
@@ -209,9 +229,9 @@
                   <label class="form-label">膚色</label>
                   <select class="form-select" id="skinTone" required>
                     <option value="">請選擇</option>
-                    <option value="fair">白皙膚色</option>
-                    <option value="natural">自然膚色</option>
-                    <option value="warm">小麥膚色</option>
+                    <option value="白皙">白皙膚色</option>
+                    <option value="自然">自然膚色</option>
+                    <option value="小麥">小麥膚色</option>
                   </select>
                 </div>
 
@@ -225,26 +245,36 @@
                   </select>
                 </div>
 
-                <div class="col-md-6">
-                  <label class="form-label">偏好風格</label>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label text-muted">偏好風格</label>
                   <select class="form-select" id="style" required>
                     <option value="">請選擇</option>
-                    <option value="natural">自然清新</option>
-                    <option value="korean">韓系溫柔</option>
-                    <option value="sweet">甜美可愛</option>
-                    <option value="cool">清冷個性</option>
-                    <option value="mature">成熟優雅</option>
+                    <option value="自然清新">自然清新</option>
+                    <option value="韓系溫柔">韓系溫柔</option>
+                    <option value="甜美可愛">甜美可愛</option>
+                    <option value="清冷個性">清冷個性</option>
+                    <option value="成熟優雅">成熟優雅</option>
+                    <option value="純慾撩人">純慾撩人</option>
+                    <option value="歐美辣妹">歐美辣妹</option>
+                    <option value="復古港風">復古港風</option>
+                    <option value="日系透明感">日系透明感</option>
+                    <option value="富家千金">富家千金</option>
+                    <option value="中性少年感">中性少年感</option>
                   </select>
                 </div>
 
-                <div class="col-md-6">
-                  <label class="form-label">使用場合</label>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label text-muted">使用場合</label>
                   <select class="form-select" id="occasion" required>
                     <option value="">請選擇</option>
-                    <option value="daily">日常上課／上班</option>
-                    <option value="date">約會聚會</option>
-                    <option value="interview">面試正式場合</option>
-                    <option value="party">派對活動</option>
+                    <option value="daily">日常通勤</option>
+                    <option value="date">浪漫約會</option>
+                    <option value="interview">面試職場</option>
+                    <option value="travel">旅遊打卡</option>
+                    <option value="concert">音樂祭/派對</option>
+                    <option value="night_out">酒吧夜店</option>
+                    <option value="wedding_guest">婚禮宴會</option>
+                    <option value="photoshoot">專業棚拍</option>
                   </select>
                 </div>
               </div>
@@ -287,123 +317,124 @@
                   <div class="result-box h-100 d-flex flex-column justify-content-center">
                     <h5 class="mb-3"><i class="bi bi-person-lines-fill"></i> 專屬風格設定</h5>
                     <div>
-                      <span class="badge-soft">臉型：<span id="resFace">分析中...</span></span>
-                      <span class="badge-soft">膚色：<span id="resSkin">分析中...</span></span>
-                      <span class="badge-soft">髮長：<span id="resHair">分析中...</span></span>
-                      <span class="badge-soft">風格：<span id="resStyle">分析中...</span></span>
-                      <span class="badge-soft">場合：<span id="resOccasion">分析中...</span></span>
+                      <span id="finalFace" class="badge-soft">臉型：<span id="resFace">分析中...</span></span>
+                      <span id="finalSkin" class="badge-soft">膚色：<span id="resSkin">分析中...</span></span>
+                      <span id="finalHair" class="badge-soft">髮長：<span id="resHair">分析中...</span></span>
+                      <span id="finalStyle" class="badge-soft">風格：<span id="resStyle">分析中...</span></span>
+                      <span id="finalOccasion" class="badge-soft">場合：<span id="resOccasion">分析中...</span></span>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div class="row g-4">
-                
-                <div class="col-lg-5">
-                  <div class="result-box h-100">
-                    <h5><i class="bi bi-scissors"></i> 推薦髮型解析</h5>
-                    
-                    <div class="mt-3">
-                      <h6 class="fw-bold text-success" style="font-size: 0.95rem;"><i class="bi bi-star-fill"></i> 最適合 (Best Fit)</h6>
-                      <div class="d-flex gap-3 text-center mt-2">
-                        <div class="flex-fill" style="width: 33%;">
-                          <img src="images/hair1.png" class="img-fluid rounded-3 mb-2 shadow-sm" style="height:160px; width:100%; object-fit:cover;">
-                          <span class="d-block text-truncate fw-bold" style="font-size: 0.85rem;">空氣瀏海大波浪</span>
-                        </div>
-                        <div class="flex-fill" style="width: 33%;">
-                          <img src="images/hair2.png" class="img-fluid rounded-3 mb-2 shadow-sm" style="height:160px; width:100%; object-fit:cover;">
-                          <span class="d-block text-truncate fw-bold" style="font-size: 0.85rem;">韓系C字層次</span>
-                        </div>
-                        <div class="flex-fill" style="width: 33%;">
-                          <img src="images/hair3.png" class="img-fluid rounded-3 mb-2 shadow-sm" style="height:160px; width:100%; object-fit:cover;">
-                          <span class="d-block text-truncate fw-bold" style="font-size: 0.85rem;">半丸子頭</span>
-                        </div>
-                      </div>
-                    </div>
 
-                    <div class="mt-4 pt-3 border-top">
-                      <h6 class="fw-bold text-danger" style="font-size: 0.95rem;"><i class="bi bi-x-circle-fill"></i> 不建議 (Avoid)</h6>
-                      <div class="d-flex gap-3 text-center mt-2">
-                        <div class="flex-fill" style="width: 33%;">
-                          <img src="images/hair4.png" class="img-fluid rounded-3 mb-2 shadow-sm" style="height:110px; width:100%; object-fit:cover; filter: grayscale(80%);">
-                          <span class="text-muted d-block text-truncate" style="font-size: 0.85rem;">厚重齊瀏海</span>
-                        </div>
-                        <div class="flex-fill" style="width: 33%;">
-                          <img src="images/hair5.png" class="img-fluid rounded-3 mb-2 shadow-sm" style="height:110px; width:100%; object-fit:cover; filter: grayscale(80%);">
-                          <span class="text-muted d-block text-truncate" style="font-size: 0.85rem;">貼頭皮直髮</span>
-                        </div>
-                        <div class="flex-fill" style="width: 33%;">
-                          </div>
-                      </div>
-                    </div>
-                    
-                  </div>
-                </div>
+              <div class="col-lg-7">
+                <div class="row g-4">
 
-                <div class="col-lg-7">
-                  <div class="row g-4 h-100">
-                    <div class="col-md-6">
-                      <div class="result-box h-100">
-                        <h5><i class="bi bi-palette"></i> 推薦髮色盤</h5>
-                        <div class="d-flex align-items-center mb-3 mt-4">
-                          <div class="color-circle me-3 flex-shrink-0" style="background-color: #9C7C64; width: 45px; height: 45px; border-radius: 50%; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);"></div>
-                          <div>
-                            <h6 class="mb-1 fw-bold fs-6">霧感奶茶棕</h6>
-                            <p class="text-muted mb-0" style="font-size: 0.75rem;">輕盈透明感，提亮亞洲膚色。</p>
+                  <div class="col-12">
+                    <div class="result-box p-4 border-0">
+                      <h5><i class="bi bi-scissors"></i> 推薦髮型解析</h5>
+
+                      <div class="mt-3">
+                        <h6 class="fw-bold text-success" style="font-size: 0.95rem;"><i class="bi bi-star-fill"></i> 最適合 (Best Fit)</h6>
+                        <div class="d-flex gap-3 text-center mt-2">
+                          <div class="flex-fill" style="width: 33%;">
+                            <img id="bestHairImg1" src="images/hair1.png" class="img-fluid rounded-3 mb-2 shadow-sm" style="height:220px; width:100%; object-fit:cover;">
+                            <span id="bestHair1" class="d-block fw-bold" style="font-size: 0.85rem;">空氣瀏海大波浪</span>
                           </div>
-                        </div>
-                        <div class="d-flex align-items-center mb-3">
-                          <div class="color-circle me-3 flex-shrink-0" style="background-color: #6B4E31; width: 45px; height: 45px; border-radius: 50%; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);"></div>
-                          <div>
-                            <h6 class="mb-1 fw-bold fs-6">焦糖暖棕色</h6>
-                            <p class="text-muted mb-0" style="font-size: 0.75rem;">溫柔浪漫，視覺髮質更柔順。</p>
+                          <div class="flex-fill" style="width: 33%;">
+                            <img id="bestHairImg2" src="images/hair2.png" class="img-fluid rounded-3 mb-2 shadow-sm" style="height:220px; width:100%; object-fit:cover;">
+                            <span id="bestHair2" class="d-block fw-bold" style="font-size: 0.85rem;">韓系C字層次</span>
                           </div>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="color-circle me-3 flex-shrink-0" style="background-color: #3B332C; width: 45px; height: 45px; border-radius: 50%; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);"></div>
-                          <div>
-                            <h6 class="mb-1 fw-bold fs-6">冷光黑茶色</h6>
-                            <p class="text-muted mb-0" style="font-size: 0.75rem;">低調高級感，適合正式場合。</p>
+                          <div class="flex-fill" style="width: 33%;">
+                            <img id="bestHairImg3" src="images/hair3.png" class="img-fluid rounded-3 mb-2 shadow-sm" style="height:220px; width:100%; object-fit:cover;">
+                            <span id="bestHair3" class="d-block fw-bold" style="font-size: 0.85rem;">半丸子頭</span>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                      <div class="result-box h-100">
-                        <h5><i class="bi bi-brush"></i> 妝容步驟解析</h5>
-                        <div class="d-flex mb-4 align-items-center mt-4">
-                          <img src="images/makeup1.png" class="rounded-3 me-3 shadow-sm flex-shrink-0" style="width: 120px; height: 120px; object-fit: cover;">
-                          <div>
-                            <h6 class="mb-1 fw-bold" style="font-size: 0.95rem;">Step 1: 輕透底妝</h6>
-                            <p class="text-muted mb-0" style="font-size: 0.8rem;">選用保濕型粉底，保留肌膚自然紋理與水光感。</p>
+
+                      <div class="mt-4 pt-3 border-top">
+                        <h6 class="fw-bold text-danger" style="font-size: 0.95rem;"><i class="bi bi-x-circle-fill"></i> 不建議 (Avoid)</h6>
+                        <div class="d-flex gap-3 text-center mt-2">
+                          <div class="flex-fill" style="width: 33%;">
+                            <img id="avoidHairImg1" src="images/hair4.png" class="img-fluid rounded-3 mb-2 shadow-sm" style="height:160px; width:100%; object-fit:cover; filter: grayscale(80%);">
+                            <span id="avoidHair1" class="text-muted d-block" style="font-size: 0.85rem;">厚重齊瀏海</span>
                           </div>
-                        </div>
-                        <div class="d-flex mb-4 align-items-center">
-                          <img src="images/makeup2.png" class="rounded-3 me-3 shadow-sm flex-shrink-0" style="width: 120px; height: 120px; object-fit: cover;">
-                          <div>
-                            <h6 class="mb-1 fw-bold" style="font-size: 0.95rem;">Step 2: 輪廓眼妝</h6>
-                            <p class="text-muted mb-0" style="font-size: 0.8rem;">暖調大地色加深眼邃，點綴珠光於臥蠶放大雙眼。</p>
+                          <div class="flex-fill" style="width: 33%;">
+                            <img id="avoidHairImg2" src="images/hair5.png" class="img-fluid rounded-3 mb-2 shadow-sm" style="height:160px; width:100%; object-fit:cover; filter: grayscale(80%);">
+                            <span id="avoidHair2" class="text-muted d-block" style="font-size: 0.85rem;">貼頭皮直髮</span>
                           </div>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <img src="images/makeup3.png" class="rounded-3 me-3 shadow-sm flex-shrink-0" style="width: 120px; height: 120px; object-fit: cover;">
-                          <div>
-                            <h6 class="mb-1 fw-bold" style="font-size: 0.95rem;">Step 3: 氛圍唇頰</h6>
-                            <p class="text-muted mb-0" style="font-size: 0.8rem;">使用無花果色腮紅與同色系水光唇釉，打造好氣色。</p>
-                          </div>
+                          <div class="flex-fill" style="width: 33%;"></div>
                         </div>
                       </div>
                     </div>
                   </div>
+
+                  <div class="col-12">
+                    <div class="result-box p-4 border-0">
+                      <h5><i class="bi bi-palette"></i> 推薦髮色盤</h5>
+                      <div class="d-flex align-items-center mb-3 mt-4">
+                        <div id="colorCircle1" class="color-circle me-3 flex-shrink-0" style="background-color: #9C7C64; width: 45px; height: 45px; border-radius: 50%; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);"></div>
+                        <div>
+                          <h6 id="colorName1" class="mb-1 fw-bold fs-6">霧感奶茶棕</h6>
+                          <p id="colorDesc1" class="text-muted mb-0" style="font-size: 0.75rem;">輕盈透明感，提亮亞洲膚色。</p>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center mb-3">
+                        <div id="colorCircle2" class="color-circle me-3 flex-shrink-0" style="background-color: #6B4E31; width: 45px; height: 45px; border-radius: 50%; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);"></div>
+                        <div>
+                          <h6 id="colorName2" class="mb-1 fw-bold fs-6">焦糖暖棕色</h6>
+                          <p id="colorDesc2" class="text-muted mb-0" style="font-size: 0.75rem;">溫柔浪漫，視覺髮質更柔順。</p>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div id="colorCircle3" class="color-circle me-3 flex-shrink-0" style="background-color: #3B332C; width: 45px; height: 45px; border-radius: 50%; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);"></div>
+                        <div>
+                          <h6 id="colorName3" class="mb-1 fw-bold fs-6">冷光黑茶色</h6>
+                          <p id="colorDesc3" class="text-muted mb-0" style="font-size: 0.75rem;">低調高級感，適合正式場合。</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
-              </div>
+              </div> <div class="col-lg-5">
+                <div class="result-box h-100 p-4 border-0">
+                  <h5><i class="bi bi-brush"></i> 妝容步驟解析</h5>
+
+                  <div class="mt-4">
+                    <div class="mb-4 text-center">
+                      <img id="makeupImg1" src="images/makeup1.png" class="rounded-3 mb-2 shadow-sm" style="width: 120px; height: 160px; object-fit: cover;">
+                      <div>
+                        <h6 id="makeupTitle1" class="mb-1 fw-bold" style="font-size: 0.95rem;">Step 1</h6>
+                        <p id="makeupDesc1" class="text-muted mb-0 text-start px-2" style="font-size: 0.85rem; line-height: 1.6; word-break: break-word;">等待 AI 分析中...</p>
+                      </div>
+                    </div>
+                    <div class="mb-4 text-center">
+                      <img id="makeupImg2" src="images/makeup2.png" class="rounded-3 mb-2 shadow-sm" style="width: 120px; height: 160px; object-fit: cover;">
+                      <div>
+                        <h6 id="makeupTitle2" class="mb-1 fw-bold" style="font-size: 0.95rem;">Step 2</h6>
+                        <p id="makeupDesc2" class="text-muted mb-0 text-start px-2" style="font-size: 0.85rem; line-height: 1.6; word-break: break-word;">等待 AI 分析中...</p>
+                      </div>
+                    </div>
+                    <div class="mb-4 text-center">
+                      <img id="makeupImg3" src="images/makeup3.png" class="rounded-3 mb-2 shadow-sm" style="width: 120px; height: 160px; object-fit: cover;">
+                      <div>
+                        <h6 id="makeupTitle3" class="mb-1 fw-bold" style="font-size: 0.95rem;">Step 3</h6>
+                        <p id="makeupDesc3" class="text-muted mb-0 text-start px-2" style="font-size: 0.85rem; line-height: 1.6; word-break: break-word;">等待 AI 分析中...</p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div> </div>
               
               <div class="row mt-4">
                 <div class="col-12 text-center">
                   <div class="result-box" style="background: #fff; border: 2px dashed #bf82d8;">
                     <h5 class="text-dark"><i class="bi bi-lightbulb text-warning"></i> 總結建議</h5>
-                    <p id="reasonResult" class="mb-0 text-muted">建議以長度在鎖骨以下，層次感為主。瀏海能柔化臉部線條，提升親和力。捲度帶來柔和感，整體更有氛圍感。</p>
+                    <p id="aiSuggestionText" class="mb-0 text-muted">建議以長度在鎖骨以下，層次感為主。瀏海能柔化臉部線條，提升親和力。捲度帶來柔和感，整體更有氛圍感。</p>
                   </div>
                   <button class="btn btn-beauty mt-4 px-5" onclick="saveFavorite()">
                     <i class="bi bi-download me-2"></i>儲存我的專屬報告

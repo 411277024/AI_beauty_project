@@ -366,3 +366,63 @@ footer {
     margin-bottom: 20px;
 }
 /* 其他區塊的 Flex 或 Grid 排版... */
+/* 1. 修正左邊「使用者照片」比例，防止變形 */
+#resultPortrait {
+    object-fit: cover !important;
+    aspect-ratio: 3 / 4;
+    width: 100%;
+    max-height: 280px; 
+    border-radius: 10px;
+}
+
+/* 2. 修正右邊「妝容步驟」圖片寬度，讓旁邊的文字有空間展開 */
+.mock-makeup-img {
+    width: 100px !important; 
+    height: 133px !important; 
+    object-fit: cover !important;
+    flex-shrink: 0; 
+    border-radius: 8px;
+}
+/* 確保妝容圖片比例固定，絕對不准擠壓到右邊的文字 */
+.mock-makeup-img {
+    width: 110px !important;
+    height: 146px !important;
+    flex-shrink: 0 !important;
+}
+
+/* 強制讓圖片旁邊的文字容器，自動填滿剩下的寬度，不再被擠扁 */
+.mock-makeup-img + div, .mock-makeup-img ~ div {
+    flex: 1 1 auto !important;
+    min-width: 0 !important; 
+}
+/* 1. 強制統一所有髮型佔位圖的尺寸與比例 */
+.mock-hair-img {
+    width: 100% !important;
+    aspect-ratio: 3 / 4 !important; /* 鎖死 3:4 黃金比例 */
+    object-fit: cover !important; 
+    border-radius: 8px;
+    display: block;
+}
+
+/* 2. 強制圖片下方的文字「自動換行」，絕對不准出現... */
+.mock-hair-img + p, 
+.mock-hair-img ~ p,
+[id^="bestHair"], 
+[id^="avoidHair"] {
+    white-space: normal !important; /* 允許文字斷行 */
+    word-wrap: break-word !important; /* 確保長字串會換到下一行 */
+    overflow: visible !important; /* 顯示所有內容 */
+    text-overflow: clip !important; /* 關閉 ... 的縮寫效果 */
+    display: block !important;
+    line-height: 1.4 !important; /* 增加行距，讓多行字更好看 */
+    margin-top: 10px;
+}
+
+/* 🌟 核心修復：縮小妝容圖片尺寸，騰出空間給描述文字 🌟 */
+/* 1. 嚴格鎖死妝容圖片的寬度，讓它變小！絕對不准長大！ */
+/* 1. 妝容圖片：固定縮小、置中、強制獨立一行 (絕對不准左右擠壓文字) */
+/* 🌟 妝容步驟：終極「上圖下文」強制排版 🌟 */
+
+/* 1. 找到包住圖片和文字的隱形容器，強制把「左右並排」變成「垂直堆疊」 */
+
+/* 2. 圖片縮小，維持比例，絕對不變形 */
