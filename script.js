@@ -12,7 +12,7 @@ const htmlElement = document.documentElement;
 //   · PROD_API 留空 = 離線版，使用下方內建資料，不呼叫任何後端
 // ⚠️ API 金鑰只能放在後端的環境變數，絕對不要寫在這個檔案
 // ==========================================
-const PROD_API = "";
+const PROD_API = " https://ai-beauty-api-w6ua.onrender.com";
 const IS_LOCAL = ["localhost", "127.0.0.1"].includes(location.hostname);
 const API_BASE = IS_LOCAL ? "" : PROD_API;
 const USE_API = IS_LOCAL || PROD_API !== "";
